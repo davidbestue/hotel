@@ -13,21 +13,27 @@ df_rooms=pd.DataFrame({'habitaciones':habitaciones,
 
 
 # Crear df con los datos del mes
-dias_mes=30
-df_mes = pd.DataFrame(np.zeros((len(df_rooms) , dias_mes)) ) 
-df_mes.columns=np.arange(1, dias_mes+1)
+dias_mes=[30,31,31]
+meses_temporada=['6', '7', '8']
 
+meses=[]
+for idx_mes, mes in enumerate(meses_temporada):
+    df_mes = pd.DataFrame(np.zeros((len(df_rooms) , dias_mes[idx_mes])) ) 
+    df_mes.columns= [str(np.arange(1, dias_mes[idx_mes]+1)[i]) + '/' + meses_temporada[idx_mes] for i in range(dias_mes[idx_mes])]
+    meses.append(df_mes)
+
+
+df_temporada=pd.concat(meses, axis=1)
 # Poner juntos el de habitaciones y meses
-df_all=pd.concat([df_rooms, df_mes], axis=1)
-
+df_all=pd.concat([df_rooms, df_temporada], axis=1)
 
 
 #### Entrar info
 
 
-msg = "Enter your personal information"
-title = "Credit Card Application"
-fieldNames = ["Name","Street Address","City","State","ZipCode"]
+msg = "Información"
+title = "Reserva"
+fieldNames = ["Nombre y apellidos","número de habitaciones","tipo de habitación", "entrada", "salida", "observaciones"]
 fieldValues = []  # we start with blanks for the values
 fieldValues = easygui.multenterbox(msg,title, fieldNames)
 
@@ -42,7 +48,7 @@ while 1:
     fieldValues = multenterbox(errmsg, title, fieldNames, fieldValues)
 
 
-print("Reply was:", fieldValues)
+print(fieldValues)
 
 
 
