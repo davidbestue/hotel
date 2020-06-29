@@ -43,6 +43,20 @@ idx_entrada = np.where(df.columns==entrada)[0][0]
 idx_salida = np.where(df.columns==salida)[0][0]  
 df_tipo_dias = df_tipo.iloc[:, idx_entrada:idx_salida] #df de el tipo seleccionado, los días seleccionados
 
+## en el df del tipo y días ver cuantas hay disponibles (todo 0 en la fila)
+libres=[]
+for hab_ in range(len(df_tipo_dias)):
+    if sum(df_tipo_dias.iloc[hab_, :]==0) == len(df_tipo_dias.iloc[hab_, :]):
+        libres.append(hab_) 
+
+
+if len(libres)<int(n_hab):
+    print('No hay tantas habitaciones LIBRES de este tipo')
+    print('De este tipo hay: ' + str(len(libres)) + ' disponibles')
+    exit()
+
+
+
 print('lalala')
 
 # # Create a Pandas Excel writer using XlsxWriter as the engine.
