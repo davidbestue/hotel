@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import easygui   ## ¿¿ conda install -c conda-forge easygui  ??
 
 # Crear Dataframe con los datos de las habitaciones del hotel
 habitaciones=[1,2,3,4,5,6,7,8,9,10]
@@ -18,6 +19,30 @@ df_mes.columns=np.arange(1, dias_mes+1)
 
 # Poner juntos el de habitaciones y meses
 df_all=pd.concat([df_rooms, df_mes], axis=1)
+
+
+
+#### Entrar info
+
+
+msg = "Enter your personal information"
+title = "Credit Card Application"
+fieldNames = ["Name","Street Address","City","State","ZipCode"]
+fieldValues = []  # we start with blanks for the values
+fieldValues = easygui.multenterbox(msg,title, fieldNames)
+
+# make sure that none of the fields was left blank
+while 1:
+    if fieldValues == None: break
+    errmsg = ""
+    for i in range(len(fieldNames)):
+      if fieldValues[i].strip() == "":
+        errmsg = errmsg + ('"%s" is a required field.\n\n' % fieldNames[i])
+    if errmsg == "": break # no problems found
+    fieldValues = multenterbox(errmsg, title, fieldNames, fieldValues)
+
+
+print("Reply was:", fieldValues)
 
 
 
