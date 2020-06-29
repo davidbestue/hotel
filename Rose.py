@@ -12,9 +12,9 @@ df_rooms=pd.DataFrame({'habitaciones':habitaciones,
     'clase':clase, 'terraza':terraza, 'ruidosa':ruidosa})
 
 
-# Crear df con los datos del mes
-dias_mes=[30,31,31]
-meses_temporada=['6', '7', '8']
+# Crear df con los datos de la temporada (empieza 1 de junio y acaba 31 de agosto (p.ej))
+dias_mes=[30,31,31] #dias los meses de junio, julio y agosto
+meses_temporada=['6', '7', '8'] #número del mes: junio, julio y agosto
 
 meses=[]
 for idx_mes, mes in enumerate(meses_temporada):
@@ -25,7 +25,14 @@ for idx_mes, mes in enumerate(meses_temporada):
 
 df_temporada=pd.concat(meses, axis=1)
 # Poner juntos el de habitaciones y meses
-df_all=pd.concat([df_rooms, df_temporada], axis=1)
+df=pd.concat([df_rooms, df_temporada], axis=1)
+
+
+# Create a Pandas Excel writer using XlsxWriter as the engine.
+writer = pd.ExcelWriter('Verano_2020.xlsx', engine='xlsxwriter')
+# Convert the dataframe to an XlsxWriter Excel object.
+df.to_excel(writer, sheet_name='Sheet1')
+
 
 
 #### Entrar info
