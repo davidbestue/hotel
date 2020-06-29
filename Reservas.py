@@ -7,7 +7,7 @@ import sys
 #### Entrar info
 msg = "Información"
 title = "Reserva"
-fieldNames = ["Nombre y apellidos","número de habitaciones","tipo de habitación", "entrada", "salida", "observaciones"]
+fieldNames = ["Nombre y apellidos","DNI", "número de habitaciones","tipo de habitación", "entrada", "salida", "observaciones"]
 fieldValues = []  # we start with blanks for the values
 fieldValues = easygui.multenterbox(msg,title, fieldNames)
 
@@ -24,7 +24,7 @@ while 1:
 
 #print(fieldValues)
 
-nombre, n_hab, tipo_hab, entrada, salida, obs = fieldValues
+nombre, DNI, n_hab, tipo_hab, entrada, salida, obs = fieldValues
 
 
 df=pd.read_excel('Verano_2020.xlsx')
@@ -55,6 +55,26 @@ if len(libres)<int(n_hab):
     print('De este tipo hay: ' + str(len(libres)) + ' disponibles')
     exit()
 
+
+##
+
+###Confirmar reserva
+
+image = "book_.gif"
+msg = '¿Confirmar la reserva de '+ n_hab + ' habitaciones, de '  + entrada + ' a ' + salida + '?'
+choices = ["Sí","No"]
+reply = easygui.buttonbox(msg, image=image, choices=choices)
+
+
+if reply == 'Sí':
+    for hab_ in range(int(n_hab)):
+        df_tipo_dias.iloc[hab_, :]=1
+        g = df_tipo_dias.index[hab_]
+        detalles_habitacion_reservada = df.loc[g][['clase', 'habitaciones', 'terraza']]  
+        
+
+
+#### Generar archivo de registro de la reserva
 
 
 print('lalala')
