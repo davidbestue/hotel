@@ -56,7 +56,17 @@ if len(libres)<int(n_hab):
     exit()
 
 
-##
+#### Precio total (numero de noche y habitaciones del mismo tipo)
+n_total_noches = np.shape(df_tipo_dias)[1] - 1 
+n_habitaciones= int(n_hab)
+if tipo_hab=='1':
+    precio_noche=20
+elif tipo_hab=='2':
+    precio_noche=40
+elif tipo_hab=='3':
+    precio_noche=50
+
+TotalAmount = n_habitaciones*precio_noche*n_total_noches
 
 ###Confirmar reserva
 
@@ -68,16 +78,27 @@ reply = easygui.buttonbox(msg, image=image, choices=choices)
 
 if reply == 'Sí':
     for hab_ in range(int(n_hab)):
-        df_tipo_dias.iloc[hab_, :]=1
+        df_tipo_dias.iloc[hab_, :]=1 ### marcar como 1 la hab reservada
+        #### Generar archivo de registro de la reserva
         g = df_tipo_dias.index[hab_]
         detalles_habitacion_reservada = df.loc[g][['clase', 'habitaciones', 'terraza']]  
+        habitación_res = str(detalles_habitacion_reservada.habitaciones) 
+        #### Generar archivo de registro de la reserva
+        name_ = entrada+'_'+salida+'_'+nombre+'_'+ str(habitación_res)+'.txt'
+        name_ = nombre+'_'+ str(habitación_res)+'.txt'
+        text_file = open(name_, "w")
+        text_file.write("Habitación: %s" % habitación_res)
+        text_file.write("Nombre: %s" % nombre)
+        text_file.write("DNI: %s" % DNI)
+        text_file.write("entrada: %s" % entrada)
+        text_file.write("salida: %s" % salida)
+        text_file.write("clase habitación: %s" % detalles_habitacion_reservada.clase)
+        text_file.write("terraza habitación: %s" % detalles_habitacion_reservada.terraza)
+        text_file.write("Total (€): %s" % TotalAmount)
+        text_file.close()
         
 
 
-#### Generar archivo de registro de la reserva
-
-
-print('lalala')
 
 # # Create a Pandas Excel writer using XlsxWriter as the engine.
 # writer = pd.ExcelWriter('pandas_conditional.xlsx', engine='xlsxwriter')
