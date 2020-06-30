@@ -1,0 +1,8 @@
+Habitación: 10
+Nombre: David
+DNI: 888855L
+entrada: 2/6
+salida: 4/6
+clase habitación: 1
+terraza habitación: 1
+Total (€): 40

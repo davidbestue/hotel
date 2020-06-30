@@ -79,9 +79,11 @@ reply = easygui.buttonbox(msg, image=image, choices=choices)
 ### Grabar un .txt con los datos
 if reply == 'Sí':
     for hab_ in range(int(n_hab)):
-        df_tipo_dias.iloc[hab_, :]=1 ### marcar como 1 la hab reservada
+        #df_tipo_dias.iloc[hab_, :]=1 ### marcar como 1 la hab reservada
         #### Generar archivo de registro de la reserva
         g = df_tipo_dias.index[hab_]
+        df.iloc[g, idx_entrada:idx_salida] =1
+        ##
         detalles_habitacion_reservada = df.loc[g][['clase', 'habitaciones', 'terraza']]  
         habitación_res = str(detalles_habitacion_reservada.habitaciones) 
         #### Generar archivo de registro de la reserva
@@ -106,6 +108,24 @@ if reply == 'Sí':
         text_file.close()
         
 
+
+
+### Acutalizar con ROJO de reserva el excel
+writer = pd.ExcelWriter('Verano_2021.xlsx', engine='xlsxwriter')
+df.to_excel(writer, sheet_name='Sheet1')
+
+orkbook  = writer.book
+worksheet = writer.sheets['Sheet1']
+
+format_reserva = workbook.add_format({'bg_color':   '#FFC7CE',
+                                'font_color': '#000000'})
+
+
+
+worksheet.conditional_format('B2:B8', {'type':     'cell',
+                                    'criteria': 'equal to',
+                                    'value':     30,
+                                    'format':    format_ocupada})
 
 
 # # Create a Pandas Excel writer using XlsxWriter as the engine.
