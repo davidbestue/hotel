@@ -87,14 +87,21 @@ if reply == 'Sí':
         name_ = entrada+'_'+salida+'_'+nombre+'_'+ str(habitación_res)+'.txt'
         name_ = nombre+'_'+ str(habitación_res)+'.txt'
         text_file = open(name_, "w")
-        text_file.write("Habitación: %s" % habitación_res)
-        text_file.write("Nombre: %s" % nombre)
-        text_file.write("DNI: %s" % DNI)
-        text_file.write("entrada: %s" % entrada)
-        text_file.write("salida: %s" % salida)
-        text_file.write("clase habitación: %s" % detalles_habitacion_reservada.clase)
-        text_file.write("terraza habitación: %s" % detalles_habitacion_reservada.terraza)
-        text_file.write("Total (€): %s" % TotalAmount)
+        text_file.write("Habitación: %s" % habitación_res);
+        text_file.write("\n")
+        text_file.write("Nombre: %s" % nombre);
+        text_file.write("\n")
+        text_file.write("DNI: %s" % DNI);
+        text_file.write("\n")
+        text_file.write("entrada: %s" % entrada);
+        text_file.write("\n")
+        text_file.write("salida: %s" % salida);
+        text_file.write("\n")
+        text_file.write("clase habitación: %s" % detalles_habitacion_reservada.clase);
+        text_file.write("\n")
+        text_file.write("terraza habitación: %s" % detalles_habitacion_reservada.terraza);
+        text_file.write("\n")
+        text_file.write("Total (€): %s" % TotalAmount);
         text_file.close()
         
 
