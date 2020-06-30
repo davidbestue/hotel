@@ -124,6 +124,18 @@ alphD= [alph[3]+ alph[i] for i in range(len(alph))]
 excel_columns=alph+alphA+alphB+alphC+alphD   
 excel_columns=excel_columns[1:] ##empieza por la B
 
+
+### Poner en rojo las reservas
+### Acutalizar con ROJO de reserva el excel
+writer = pd.ExcelWriter('Verano_2021.xlsx', engine='xlsxwriter')
+df.to_excel(writer, sheet_name='Sheet1') #sobreescribirás el ya generado
+
+orkbook  = writer.book
+worksheet = writer.sheets['Sheet1']
+
+format_reserva = workbook.add_format({'bg_color':   '#FFC7CE',
+                                'font_color': '#000000'})
+
 #
 for r in range(len(rows_)):
     ### filas de las reservas --> pasar a formato de Excel
@@ -133,10 +145,15 @@ for r in range(len(rows_)):
     salida_xls = excel_columns[idx_salida-1]  ##hay que restar 1
     ###
     indexes_excel = entrada_xls + row_xls +':' + salida_xls+row_xls 
+    ###
+    worksheet.conditional_format(indexes_excel, {'type':     'cell',
+                                    'criteria': 'equal to',
+                                    'value':     30,
+                                    'format':    format_ocupada})
 
 
 
-
+writer.save()
 
 ### Acutalizar con ROJO de reserva el excel
 writer = pd.ExcelWriter('Verano_2021.xlsx', engine='xlsxwriter')
