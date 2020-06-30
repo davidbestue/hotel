@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 import easygui   ## ¿¿ conda install -c conda-forge easygui  ??
-import sys 
+import string
+
 
 
 #### Entrar info
@@ -77,11 +78,14 @@ reply = easygui.buttonbox(msg, image=image, choices=choices)
 
 
 ### Grabar un .txt con los datos
+rows_=[]
+
 if reply == 'Sí':
     for hab_ in range(int(n_hab)):
         #df_tipo_dias.iloc[hab_, :]=1 ### marcar como 1 la hab reservada
         #### Generar archivo de registro de la reserva
         row = df_tipo_dias.index[hab_]
+        rows_.append(row)
         df.iloc[row, idx_entrada:idx_salida] =1
         ##
         detalles_habitacion_reservada = df.loc[row][['clase', 'habitaciones', 'terraza']]  
@@ -113,7 +117,6 @@ if reply == 'Sí':
 ### Cambiar los index del dataframe a alfabeto (excel)
 row_xls = row+2
 
-import string
 alph = list(string.ascii_uppercase) 
 alphA= [alph[0]+ alph[i] for i in range(len(alph))] 
 alphB= [alph[1]+ alph[i] for i in range(len(alph))] 
@@ -121,6 +124,14 @@ alphC= [alph[2]+ alph[i] for i in range(len(alph))]
 alphD= [alph[3]+ alph[i] for i in range(len(alph))] 
 #
 excel_columns=alph+alphA+alphB+alphC+alphD   
+excel_columns=excel_columns[1:] ##empieza por la B
+
+
+for r in range(len(rows_)):
+    row_xls = rows_[r]+2
+    
+
+
 
 ### Acutalizar con ROJO de reserva el excel
 writer = pd.ExcelWriter('Verano_2021.xlsx', engine='xlsxwriter')
