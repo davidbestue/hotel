@@ -81,10 +81,10 @@ if reply == 'Sí':
     for hab_ in range(int(n_hab)):
         #df_tipo_dias.iloc[hab_, :]=1 ### marcar como 1 la hab reservada
         #### Generar archivo de registro de la reserva
-        g = df_tipo_dias.index[hab_]
-        df.iloc[g, idx_entrada:idx_salida] =1
+        row = df_tipo_dias.index[hab_]
+        df.iloc[row, idx_entrada:idx_salida] =1
         ##
-        detalles_habitacion_reservada = df.loc[g][['clase', 'habitaciones', 'terraza']]  
+        detalles_habitacion_reservada = df.loc[row][['clase', 'habitaciones', 'terraza']]  
         habitación_res = str(detalles_habitacion_reservada.habitaciones) 
         #### Generar archivo de registro de la reserva
         name_ = entrada+'_'+salida+'_'+nombre+'_'+ str(habitación_res)+'.txt'
@@ -110,9 +110,22 @@ if reply == 'Sí':
 
 
 
+### Cambiar los index del dataframe a alfabeto (excel)
+row_xls = row+2
+
+import string
+alph = list(string.ascii_uppercase) 
+alphA= [alph[0]+ alph[i] for i in range(len(alph))] 
+alphB= [alph[1]+ alph[i] for i in range(len(alph))] 
+alphC= [alph[2]+ alph[i] for i in range(len(alph))] 
+alphD= [alph[3]+ alph[i] for i in range(len(alph))] 
+#
+excel_columns=alph+alphA+alphB+alphC+alphD   
+
 ### Acutalizar con ROJO de reserva el excel
 writer = pd.ExcelWriter('Verano_2021.xlsx', engine='xlsxwriter')
 df.to_excel(writer, sheet_name='Sheet1')
+writer.save()
 
 orkbook  = writer.book
 worksheet = writer.sheets['Sheet1']
