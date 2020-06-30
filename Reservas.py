@@ -69,13 +69,14 @@ elif tipo_hab=='3':
 TotalAmount = n_habitaciones*precio_noche*n_total_noches
 
 ###Confirmar reserva
-
 image = "book_.gif"
 msg = '¿Confirmar la reserva de '+ n_hab + ' habitaciones, de '  + entrada + ' a ' + salida + '?'
 choices = ["Sí","No"]
 reply = easygui.buttonbox(msg, image=image, choices=choices)
 
 
+
+### Grabar un .txt con los datos
 if reply == 'Sí':
     for hab_ in range(int(n_hab)):
         df_tipo_dias.iloc[hab_, :]=1 ### marcar como 1 la hab reservada
