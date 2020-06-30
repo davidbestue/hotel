@@ -114,9 +114,7 @@ if reply == 'Sí':
 
 
 
-### Cambiar los index del dataframe a alfabeto (excel)
-row_xls = row+2
-
+### columnas de el excel
 alph = list(string.ascii_uppercase) 
 alphA= [alph[0]+ alph[i] for i in range(len(alph))] 
 alphB= [alph[1]+ alph[i] for i in range(len(alph))] 
@@ -126,10 +124,15 @@ alphD= [alph[3]+ alph[i] for i in range(len(alph))]
 excel_columns=alph+alphA+alphB+alphC+alphD   
 excel_columns=excel_columns[1:] ##empieza por la B
 
-
+#
 for r in range(len(rows_)):
-    row_xls = rows_[r]+2
-    
+    ### filas de las reservas --> pasar a formato de Excel
+    row_xls = rows_[r]+2 ##las filas, hay que sumar 2 para que coincida
+    ### columnas
+    col_entrada = excel_columns[idx_entrada]  
+    col_salida = excel_columns[idx_salida-1]  ##hay que restar 1
+
+
 
 
 
