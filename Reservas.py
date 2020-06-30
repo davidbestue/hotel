@@ -62,11 +62,11 @@ if len(libres)<int(n_hab):
 n_total_noches = np.shape(df_tipo_dias)[1] - 1 
 n_habitaciones= int(n_hab)
 if tipo_hab=='1':
-    precio_noche=20
+    precio_noche=50
 elif tipo_hab=='2':
     precio_noche=40
 elif tipo_hab=='3':
-    precio_noche=50
+    precio_noche=20
 
 TotalAmount = n_habitaciones*precio_noche*n_total_noches
 
