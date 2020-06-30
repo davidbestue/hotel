@@ -127,10 +127,12 @@ excel_columns=excel_columns[1:] ##empieza por la B
 #
 for r in range(len(rows_)):
     ### filas de las reservas --> pasar a formato de Excel
-    row_xls = rows_[r]+2 ##las filas, hay que sumar 2 para que coincida
+    row_xls = str(rows_[r]+2) ##las filas, hay que sumar 2 para que coincida
     ### columnas
-    col_entrada = excel_columns[idx_entrada]  
-    col_salida = excel_columns[idx_salida-1]  ##hay que restar 1
+    entrada_xls = excel_columns[idx_entrada]  
+    salida_xls = excel_columns[idx_salida-1]  ##hay que restar 1
+    ###
+    indexes_excel = entrada_xls + row_xls +':' + salida_xls+row_xls 
 
 
 
