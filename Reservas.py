@@ -11,7 +11,8 @@ filename='Verano_2020.xlsx'
 #### Entrar info
 msg = "Información"
 title = "Reserva"
-fieldNames = ["Nombre y apellidos","DNI", "número de habitaciones","tipo de habitación", "entrada", "salida", "observaciones"]
+fieldNames = ["Nombre y apellidos","DNI", "número de habitaciones", 
+"tipo de habitación", "entrada", "salida", "observacion terraza", "observación ruido"]
 fieldValues = []  # we start with blanks for the values
 fieldValues = easygui.multenterbox(msg,title, fieldNames)
 
@@ -27,7 +28,7 @@ while 1:
 
 
 #print(fieldValues)
-nombre, DNI, n_hab, tipo_hab, entrada, salida, obs = fieldValues
+nombre, DNI, n_hab, tipo_hab, entrada, salida, obs_t, obs_r = fieldValues
 
 df=pd.read_excel(filename)
 
@@ -56,6 +57,31 @@ if len(libres)<int(n_hab):
     print('No hay tantas habitaciones LIBRES de este tipo')
     print('De este tipo hay: ' + str(len(libres)) + ' disponibles')
     exit()
+
+
+##### Observaciones
+
+#### Observación terraza
+if obs_t == 1:
+    df_t = df.loc[ (df['clase']==int(tipo_hab)) & (df['terraz']=='1')]
+    df_t = df_t.iloc[:, idx_entrada:idx_salida]
+    libres_t=[]
+    for hab_ in range(len(df_t)):
+        if sum(df_t.iloc[hab_, :]==0) == len(df_t.iloc[df_t, :]):
+            libres_t.append(hab_) 
+    ##
+    if len(libres_t)<int(n_hab):
+        print('Con terrza hay hay: ' + str(len(libres_)) + ' disponibles')
+        #print('No hay tantas habitaciones con terraza, ¿desea reservar sin terraza?')
+        image = "terraza_.gif"
+        msg = 'No hay tantas habitaciones con terraza, ¿desea reservar sin terraza?'
+        choices = ["Sí","No"]
+        reply_t = easygui.buttonbox(msg, image=image, choices=choices)
+        if reply == 'No':
+            exit()
+    else:
+        df_tipo_dias = df_t
+        
 
 
 #### Precio total (numero de noche y habitaciones del mismo tipo)
