@@ -1,8 +1,0 @@
-Habitación: 4
-Nombre: David Sanchez
-DNI: 47996718L
-entrada: 2/8
-salida: 8/8
-clase habitación: 2
-terraza habitación: 1
-Total (€): 200

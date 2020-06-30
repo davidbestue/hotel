@@ -1,8 +1,0 @@
-Habitación: 4
-Nombre: David Bestue
-DNI: 45778K
-entrada: 2/6
-salida: 6/6
-clase habitación: 2
-terraza habitación: 1
-Total (€): 240

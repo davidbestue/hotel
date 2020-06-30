@@ -4,6 +4,8 @@ import easygui   ## ¿¿ conda install -c conda-forge easygui  ??
 import string
 
 
+###
+filename='Verano_2021.xlsx'
 
 #### Entrar info
 msg = "Información"
@@ -28,7 +30,7 @@ while 1:
 nombre, DNI, n_hab, tipo_hab, entrada, salida, obs = fieldValues
 
 
-df=pd.read_excel('Verano_2020.xlsx')
+df=pd.read_excel(filename)
 
 ### Algoritmo para ver si hay disponible
 ### 1: coger en el df las filas que corresponden al tipo de habitacion y las columnas que corresponden a los días
@@ -125,12 +127,13 @@ excel_columns=alph+alphA+alphB+alphC+alphD
 excel_columns=excel_columns[1:] ##empieza por la B
 
 
+
 ### Poner en rojo las reservas
 ### Acutalizar con ROJO de reserva el excel
-writer = pd.ExcelWriter('Verano_2021.xlsx', engine='xlsxwriter')
-df.to_excel(writer, sheet_name='Sheet1') #sobreescribirás el ya generado
+writer = pd.ExcelWriter(filename, engine='xlsxwriter')
 
-orkbook  = writer.book
+df.to_excel(writer, sheet_name='Sheet1') #sobreescribirás el ya generado
+workbook  = writer.book
 worksheet = writer.sheets['Sheet1']
 
 format_reserva = workbook.add_format({'bg_color':   '#FFC7CE',
@@ -146,32 +149,15 @@ for r in range(len(rows_)):
     ###
     indexes_excel = entrada_xls + row_xls +':' + salida_xls+row_xls 
     ###
-    worksheet.conditional_format(indexes_excel, {'type':     'cell',
+    worksheet.conditional_format('F2:CS11', {'type':     'cell',
                                     'criteria': 'equal to',
-                                    'value':     30,
-                                    'format':    format_ocupada})
+                                    'value':     1,
+                                    'format':    format_reserva})
 
 
 
 writer.save()
 
-### Acutalizar con ROJO de reserva el excel
-writer = pd.ExcelWriter('Verano_2021.xlsx', engine='xlsxwriter')
-df.to_excel(writer, sheet_name='Sheet1')
-writer.save()
-
-orkbook  = writer.book
-worksheet = writer.sheets['Sheet1']
-
-format_reserva = workbook.add_format({'bg_color':   '#FFC7CE',
-                                'font_color': '#000000'})
-
-
-
-worksheet.conditional_format('B2:B8', {'type':     'cell',
-                                    'criteria': 'equal to',
-                                    'value':     30,
-                                    'format':    format_ocupada})
 
 
 # # Create a Pandas Excel writer using XlsxWriter as the engine.
