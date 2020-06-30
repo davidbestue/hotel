@@ -2,10 +2,11 @@ import pandas as pd
 import numpy as np
 import easygui   ## ¿¿ conda install -c conda-forge easygui  ??
 import string
+import os
 
 
 ###
-filename='Verano_2021.xlsx'
+filename='Verano_2020.xlsx'
 
 #### Entrar info
 msg = "Información"
@@ -26,9 +27,7 @@ while 1:
 
 
 #print(fieldValues)
-
 nombre, DNI, n_hab, tipo_hab, entrada, salida, obs = fieldValues
-
 
 df=pd.read_excel(filename)
 
@@ -93,9 +92,10 @@ if reply == 'Sí':
         detalles_habitacion_reservada = df.loc[row][['clase', 'habitaciones', 'terraza']]  
         habitación_res = str(detalles_habitacion_reservada.habitaciones) 
         #### Generar archivo de registro de la reserva
-        name_ = entrada+'_'+salida+'_'+nombre+'_'+ str(habitación_res)+'.txt'
+        #name_ = entrada+'_'+salida+'_'+nombre+'_'+ str(habitación_res)+'.txt'
         name_ = nombre+'_'+ str(habitación_res)+'.txt'
-        text_file = open(name_, "w")
+        reservas_path = os.path.join(os.getcwd() , 'reservas', name_)
+        text_file = open(reservas_path, "w")
         text_file.write("Habitación: %s" % habitación_res)
         text_file.write("\n")
         text_file.write("Nombre: %s" % nombre)
@@ -116,18 +116,6 @@ if reply == 'Sí':
 
 
 
-### columnas de el excel
-alph = list(string.ascii_uppercase) 
-alphA= [alph[0]+ alph[i] for i in range(len(alph))] 
-alphB= [alph[1]+ alph[i] for i in range(len(alph))] 
-alphC= [alph[2]+ alph[i] for i in range(len(alph))] 
-alphD= [alph[3]+ alph[i] for i in range(len(alph))] 
-#
-excel_columns=alph+alphA+alphB+alphC+alphD   
-excel_columns=excel_columns[1:] ##empieza por la B
-
-
-
 ### Poner en rojo las reservas
 ### Acutalizar con ROJO de reserva el excel
 writer = pd.ExcelWriter(filename, engine='xlsxwriter')
@@ -139,24 +127,45 @@ worksheet = writer.sheets['Sheet1']
 format_reserva = workbook.add_format({'bg_color':   '#FFC7CE',
                                 'font_color': '#000000'})
 
-#
-for r in range(len(rows_)):
-    ### filas de las reservas --> pasar a formato de Excel
-    row_xls = str(rows_[r]+2) ##las filas, hay que sumar 2 para que coincida
-    ### columnas
-    entrada_xls = excel_columns[idx_entrada]  
-    salida_xls = excel_columns[idx_salida-1]  ##hay que restar 1
-    ###
-    indexes_excel = entrada_xls + row_xls +':' + salida_xls+row_xls 
-    ###
-    worksheet.conditional_format('F2:CS11', {'type':     'cell',
-                                    'criteria': 'equal to',
-                                    'value':     1,
-                                    'format':    format_reserva})
-
+## F2 es la primera celda (up left) de reservas y CS11 la ultima (bottom right)
+worksheet.conditional_format('F2:CS11', {'type':     'cell',
+                                'criteria': 'equal to',
+                                'value':     1,
+                                'format':    format_reserva})
 
 
 writer.save()
+
+
+
+
+# ### columnas de el excel
+# alph = list(string.ascii_uppercase) 
+# alphA= [alph[0]+ alph[i] for i in range(len(alph))] 
+# alphB= [alph[1]+ alph[i] for i in range(len(alph))] 
+# alphC= [alph[2]+ alph[i] for i in range(len(alph))] 
+# alphD= [alph[3]+ alph[i] for i in range(len(alph))] 
+# #
+# excel_columns=alph+alphA+alphB+alphC+alphD   
+# excel_columns=excel_columns[1:] ##empieza por la B
+
+# for r in range(len(rows_)):
+#     ### filas de las reservas --> pasar a formato de Excel
+#     row_xls = str(rows_[r]+2) ##las filas, hay que sumar 2 para que coincida
+#     ### columnas
+#     entrada_xls = excel_columns[idx_entrada]  
+#     salida_xls = excel_columns[idx_salida-1]  ##hay que restar 1
+#     ###
+#     indexes_excel = entrada_xls + row_xls +':' + salida_xls+row_xls 
+#     ###
+#     worksheet.conditional_format('F2:CS11', {'type':     'cell',
+#                                     'criteria': 'equal to',
+#                                     'value':     1,
+#                                     'format':    format_reserva})
+
+
+
+# writer.save()
 
 
 

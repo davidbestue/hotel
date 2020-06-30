@@ -1,0 +1,8 @@
+Habitación: 10
+Nombre: Jose
+DNI: 432265G
+entrada: 5/6
+salida: 7/6
+clase habitación: 1
+terraza habitación: 1
+Total (€): 40
