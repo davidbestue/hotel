@@ -1,0 +1,8 @@
+Habitación: 9
+Nombre: Julia Pag
+DNI: 3455647J
+entrada: 3/7
+salida: 5/7
+clase habitación: 1
+terraza habitación: 1
+Total (€): 50

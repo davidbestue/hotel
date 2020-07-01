@@ -70,7 +70,7 @@ if obs_t == '1':
             libres_t.append(hab_) 
     ##
     if len(libres_t)<int(n_hab):
-        print('Con terrza hay hay: ' + str(len(libres_)) + ' disponibles')
+        print('Con terrza hay hay: ' + str(len(libres_t)) + ' disponibles')
         #print('No hay tantas habitaciones con terraza, ¿desea reservar sin terraza?')
         image = "terraza_.gif"
         msg = 'No hay tantas habitaciones con terraza, ¿desea reservar sin terraza?'
@@ -116,6 +116,7 @@ if reply == 'Sí':
         ##
         detalles_habitacion_reservada = df.loc[row][['clase', 'habitaciones', 'terraza']]  
         habitación_res = str(detalles_habitacion_reservada.habitaciones) 
+        print('Reservada la habitación '+ habitación_res)
         #### Generar archivo de registro de la reserva
         #name_ = entrada+'_'+salida+'_'+nombre+'_'+ str(habitación_res)+'.txt'
         name_ = nombre+'_'+ str(habitación_res)+'.txt'
