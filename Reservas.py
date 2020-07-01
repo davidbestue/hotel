@@ -59,8 +59,10 @@ if len(libres)<int(n_hab):
     exit()
 
 
+
 #### Observaciones
-#### Observación terraza
+
+#### Observación terraza (solamente)
 if obs_t == '1':
     ##añades la condición de tarraza
     df_t = df.loc[ (df['clase']==int(tipo_hab)) & (df['terraza']==1)].iloc[:, idx_entrada:idx_salida]
@@ -70,18 +72,59 @@ if obs_t == '1':
             libres_t.append(df_t.index[hab_]) 
     ##
     if len(libres_t)<int(n_hab):
-        print('Con terrza hay hay: ' + str(len(libres_t)) + ' disponibles')
+        print('Con terrza hay: ' + str(len(libres_t)) + ' disponibles')
         #print('No hay tantas habitaciones con terraza, ¿desea reservar sin terraza?')
         image = "terraza_.gif"
-        msg = 'No hay tantas habitaciones con terraza, ¿desea reservar sin terraza?'
+        msg = 'No hay tantas habitaciones con terraza, ¿desea completar la reservar con habitaciones sin terraza?'
         choices = ["Sí","No"]
         reply_t = easygui.buttonbox(msg, image=image, choices=choices)
         if reply_t == 'No':
             exit()
+        elif reply_t=='Sí': #si dice que si, completar que ya tengan terraza, con sin terraza
+            diferencias_ = np.setdiff1d(libres, libres_t) 
+            for n_completar in range(0, int(n_hab)-len(libres_t)):
+                libres_t.append(diferencias_[n_completar]) ## completas la lista con terraza con algunas sin terraza
+                #
+            libres=libres_t
     else:
         df_tipo_dias = df_t
         libres=libres_t
         
+#####
+
+#### Observaciones de ruido (solamente)
+if obs_r == '1':
+    ##añades la condición de tarraza
+    df_r = df.loc[ (df['clase']==int(tipo_hab)) & (df['tranquila']==1)].iloc[:, idx_entrada:idx_salida]
+    libres_r=[]
+    for hab_ in range(len(df_r)):
+        if sum(df_r.iloc[hab_, :]==0) == len(df_r.iloc[hab_, :]):
+            libres_r.append(df_r.index[hab_]) 
+    ##
+    if len(libres_r)<int(n_hab):
+        print('Tranquilas hay: ' + str(len(libres_r)) + ' disponibles')
+        #print('No hay tantas habitaciones con terraza, ¿desea reservar sin terraza?')
+        image = "ruido_.gif"
+        msg = 'No hay tantas habitaciones tranquilas, ¿desea completar la reservar con habitaciones no tan tranquilas?'
+        choices = ["Sí","No"]
+        reply_r = easygui.buttonbox(msg, image=image, choices=choices)
+        if reply_r == 'No':
+            exit()
+        elif reply_r=='Sí': #si dice que si, completar que ya tengan terraza, con sin terraza
+            diferencias_ = np.setdiff1d(libres, libres_r) 
+            for n_completar in range(0, int(n_hab)-len(libres_r)):
+                libres_r.append(diferencias_[n_completar]) ## completas la lista con terraza con algunas sin terraza
+                #
+            libres=libres_r
+    else:
+        df_tipo_dias = df_r
+        libres=libres_r
+        
+#####
+
+
+
+
 
 
 #### Precio total (numero de noche y habitaciones del mismo tipo)

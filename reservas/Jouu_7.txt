@@ -1,0 +1,8 @@
+Habitación: 7
+Nombre: Jouu
+DNI: 0458238K
+entrada: 8/6
+salida: 10/6
+clase habitación: 2
+terraza habitación: 0
+Total (€): 40

@@ -1,0 +1,8 @@
+Habitación: 4
+Nombre: Julio
+DNI: kdhfakh
+entrada: 2/6
+salida: 4/6
+clase habitación: 2
+terraza habitación: 1
+Total (€): 160

@@ -1,0 +1,8 @@
+Habitación: 6
+Nombre: Jou
+DNI: 6767676
+entrada: 8/6
+salida: 10/6
+clase habitación: 2
+terraza habitación: 0
+Total (€): 160

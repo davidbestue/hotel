@@ -1,0 +1,8 @@
+Habitación: 9
+Nombre: Roee
+DNI: 4225782H
+entrada: 2/6
+salida: 4/6
+clase habitación: 1
+terraza habitación: 1
+Total (€): 100

@@ -5,10 +5,10 @@ import numpy as np
 habitaciones=[1,2,3,4,5,6,7,8,9,10]
 clase=[3,3,3,2,2,2,2,2,1,1]
 terraza=[0,0,1,1,1,0,0,1,1,1]
-ruidosa=[1,1,1,1,0,0,0,0,0,0] 
+tranquila=[1,1,1,1,0,0,0,0,1,0] 
 
 df_rooms=pd.DataFrame({'habitaciones':habitaciones, 
-    'clase':clase, 'terraza':terraza, 'ruidosa':ruidosa})
+    'clase':clase, 'terraza':terraza, 'tranquila':tranquila})
 
 
 # Crear df con los datos de la temporada (empieza 1 de junio y acaba 31 de agosto (p.ej))

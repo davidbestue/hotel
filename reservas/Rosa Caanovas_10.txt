@@ -1,0 +1,8 @@
+Habitación: 10
+Nombre: Rosa Caanovas
+DNI: 37746537658H
+entrada: 2/6
+salida: 4/6
+clase habitación: 1
+terraza habitación: 1
+Total (€): 100

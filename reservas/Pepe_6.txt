@@ -1,0 +1,8 @@
+Habitación: 6
+Nombre: Pepe
+DNI: 762363276
+entrada: 5/6
+salida: 7/6
+clase habitación: 2
+terraza habitación: 0
+Total (€): 120
