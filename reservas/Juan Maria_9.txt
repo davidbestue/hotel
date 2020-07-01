@@ -1,0 +1,9 @@
+Habitación: 9
+Nombre: Juan Maria
+DNI: 456377H
+entrada: 3/7
+salida: 4/7
+clase habitación: 1
+terraza habitación: 1
+Observaciones: Quiero una cuna
+Total (€): 0

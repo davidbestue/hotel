@@ -139,6 +139,7 @@ elif tipo_hab=='3':
     precio_noche=20
 
 TotalAmount = n_habitaciones*precio_noche*n_total_noches
+Total_IVA = TotalAmount + TotalAmount*0.1
 
 ###Confirmar reserva
 image = "book_.gif"
@@ -186,7 +187,7 @@ if reply == 'Sí':
         text_file.write("\n")
         text_file.write("Total (€): %s" % TotalAmount)
         text_file.write("\n")
-        text_file.write("Total + IVA (10%) (€): %s" % TotalAmount + TotalAmount*0.1 )
+        text_file.write("Total + IVA (€): %s" % Total_IVA )
         text_file.close()
         
 

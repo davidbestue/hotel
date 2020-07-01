@@ -1,0 +1,10 @@
+Habitación: 4
+Nombre: Pepelu
+DNI: 48573875J
+entrada: 10/6
+salida: 12/6
+clase habitación: 2
+terraza habitación: 1
+Observaciones: Queremos cuna
+Total (€): 120
+Total + IVA (€): 132.0
