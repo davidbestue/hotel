@@ -66,7 +66,7 @@ if obs_t == '1':
     df_t = df_t.iloc[:, idx_entrada:idx_salida]
     libres_t=[]
     for hab_ in range(len(df_t)):
-        if sum(df_t.iloc[hab_, :]==0) == len(df_t.iloc[df_t, :]):
+        if sum(df_t.iloc[hab_, :]==0) == len(df_t):
             libres_t.append(hab_) 
     ##
     if len(libres_t)<int(n_hab):
