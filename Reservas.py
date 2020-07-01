@@ -59,7 +59,7 @@ if len(libres)<int(n_hab):
     exit()
 
 
-##### Observaciones
+#### Observaciones
 #### Observación terraza
 if obs_t == '1':
     df_t = df.loc[ (df['clase']==int(tipo_hab)) & (df['terraza']==1)]
