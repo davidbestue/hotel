@@ -1,0 +1,8 @@
+Habitación: 1
+Nombre: Jooo
+DNI: 344555g
+entrada: 6/8
+salida: 10/8
+clase habitación: 3
+terraza habitación: 0
+Total (€): 60

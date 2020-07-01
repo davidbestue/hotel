@@ -1,0 +1,8 @@
+Habitación: 9
+Nombre: juo
+DNI: 242458L
+entrada: 10/7
+salida: 12/7
+clase habitación: 1
+terraza habitación: 1
+Total (€): 50

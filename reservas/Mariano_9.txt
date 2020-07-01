@@ -1,0 +1,8 @@
+Habitación: 9
+Nombre: Mariano
+DNI: 465265362Y
+entrada: 6/7
+salida: 19/7
+clase habitación: 1
+terraza habitación: 1
+Total (€): 600

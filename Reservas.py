@@ -44,13 +44,13 @@ if len(df_tipo)<int(n_hab):
 ## 3: ver si hay ese número de habitaciones disponibles todos los días que se piden
 idx_entrada = np.where(df.columns==entrada)[0][0]  
 idx_salida = np.where(df.columns==salida)[0][0]  
-df_tipo_dias = df_tipo.iloc[:, idx_entrada:idx_salida] #df de el tipo seleccionado, los días seleccionados
+df_tipo_dias = df.loc[df['clase']==int(tipo_hab)].iloc[:, idx_entrada:idx_salida]
 
 ## en el df del tipo y días ver cuantas hay disponibles (todo 0 en la fila)
 libres=[]
 for hab_ in range(len(df_tipo_dias)):
     if sum(df_tipo_dias.iloc[hab_, :]==0) == len(df_tipo_dias.iloc[hab_, :]):
-        libres.append(hab_) 
+        libres.append(df_tipo_dias.index[hab_]) ## guardas los indexs de las hab libres 
 
 
 if len(libres)<int(n_hab):
@@ -62,12 +62,12 @@ if len(libres)<int(n_hab):
 #### Observaciones
 #### Observación terraza
 if obs_t == '1':
-    df_t = df.loc[ (df['clase']==int(tipo_hab)) & (df['terraza']==1)]
-    df_t = df_t.iloc[:, idx_entrada:idx_salida]
+    ##añades la condición de tarraza
+    df_t = df.loc[ (df['clase']==int(tipo_hab)) & (df['terraza']==1)].iloc[:, idx_entrada:idx_salida]
     libres_t=[]
     for hab_ in range(len(df_t)):
-        if sum(df_t.iloc[hab_, :]==0) == len(df_t):
-            libres_t.append(hab_) 
+        if sum(df_t.iloc[hab_, :]==0) == len(df_t.iloc[hab_, :]):
+            libres_t.append(df_t.index[hab_]) 
     ##
     if len(libres_t)<int(n_hab):
         print('Con terrza hay hay: ' + str(len(libres_t)) + ' disponibles')
@@ -80,6 +80,7 @@ if obs_t == '1':
             exit()
     else:
         df_tipo_dias = df_t
+        libres=libres_t
         
 
 
@@ -110,9 +111,11 @@ if reply == 'Sí':
     for hab_ in range(int(n_hab)):
         #df_tipo_dias.iloc[hab_, :]=1 ### marcar como 1 la hab reservada
         #### Generar archivo de registro de la reserva
-        row = df_tipo_dias.index[hab_]
+        #row = df_tipo_dias.index[hab_]
+        row = libres[hab_]
         rows_.append(row)
-        df.iloc[row, idx_entrada:idx_salida] =1
+        #df.iloc[row, idx_entrada:idx_salida] =1
+        df.loc[row].iloc[idx_entrada:idx_salida] =1
         ##
         detalles_habitacion_reservada = df.loc[row][['clase', 'habitaciones', 'terraza']]  
         habitación_res = str(detalles_habitacion_reservada.habitaciones) 
