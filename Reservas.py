@@ -11,8 +11,8 @@ filename='Verano_2020.xlsx'
 #### Entrar info
 msg = "Información"
 title = "Reserva"
-fieldNames = ["Nombre y apellidos","DNI", "número de habitaciones", 
-"tipo de habitación", "entrada", "salida", "observacion terraza", "observación ruido"]
+fieldNames = ["Nombre y apellidos","DNI", "Número de habitaciones", 
+"Tipo de habitación", "Entrada", "Salida", "Terraza", "Ruido", "Observaciones"]
 fieldValues = []  # we start with blanks for the values
 fieldValues = easygui.multenterbox(msg,title, fieldNames)
 
@@ -28,7 +28,7 @@ while 1:
 
 
 #print(fieldValues)
-nombre, DNI, n_hab, tipo_hab, entrada, salida, obs_t, obs_r = fieldValues
+nombre, DNI, n_hab, tipo_hab, entrada, salida, obs_t, obs_r, observ = fieldValues
 
 df=pd.read_excel(filename)
 
@@ -92,7 +92,7 @@ if obs_t == '1':
         
 #####
 
-#### Observaciones de ruido (solamente)
+#### Observación de ruido (solamente)
 if obs_r == '1':
     ##añades la condición de tarraza
     df_r = df.loc[ (df['clase']==int(tipo_hab)) & (df['tranquila']==1)].iloc[:, idx_entrada:idx_salida]
@@ -121,6 +121,7 @@ if obs_r == '1':
         libres=libres_r
         
 #####
+
 
 
 
@@ -181,7 +182,11 @@ if reply == 'Sí':
         text_file.write("\n")
         text_file.write("terraza habitación: %s" % detalles_habitacion_reservada.terraza)
         text_file.write("\n")
+        text_file.write("Observaciones: %s" % observ)
+        text_file.write("\n")
         text_file.write("Total (€): %s" % TotalAmount)
+        text_file.write("\n")
+        text_file.write("Total + IVA (10%) (€): %s" % TotalAmount + TotalAmount*0.1 )
         text_file.close()
         
 
