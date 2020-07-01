@@ -103,7 +103,6 @@ choices = ["Sí","No"]
 reply = easygui.buttonbox(msg, image=image, choices=choices)
 
 
-
 ### Grabar un .txt con los datos
 rows_=[]
 
