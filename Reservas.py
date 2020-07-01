@@ -76,7 +76,7 @@ if obs_t == '1':
         msg = 'No hay tantas habitaciones con terraza, ¿desea reservar sin terraza?'
         choices = ["Sí","No"]
         reply_t = easygui.buttonbox(msg, image=image, choices=choices)
-        if reply == 'No':
+        if reply_t == 'No':
             exit()
     else:
         df_tipo_dias = df_t
@@ -116,7 +116,7 @@ if reply == 'Sí':
         ##
         detalles_habitacion_reservada = df.loc[row][['clase', 'habitaciones', 'terraza']]  
         habitación_res = str(detalles_habitacion_reservada.habitaciones) 
-        print('Reservada la habitación '+ habitación_res)
+        print('Reservada la habitación '+ habitación_res    )
         #### Generar archivo de registro de la reserva
         #name_ = entrada+'_'+salida+'_'+nombre+'_'+ str(habitación_res)+'.txt'
         name_ = nombre+'_'+ str(habitación_res)+'.txt'
