@@ -148,7 +148,7 @@ choices = ["Sí","No"]
 reply = easygui.buttonbox(msg, image=image, choices=choices)
 
 ### Grabar un .txt con los datos
-rows_=[]
+rows_=[]  
 
 if reply == 'Sí':
     for hab_ in range(int(n_hab)):
