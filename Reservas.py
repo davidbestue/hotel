@@ -213,8 +213,6 @@ worksheet.conditional_format('F2:CS11', {'type':     'cell',
 writer.save()
 
 
-
-
 # ### columnas de el excel
 # alph = list(string.ascii_uppercase) 
 # alphA= [alph[0]+ alph[i] for i in range(len(alph))] 
